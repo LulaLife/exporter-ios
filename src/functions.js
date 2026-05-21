@@ -34,3 +34,9 @@ function buttonStyleName(groupName) {
 }
 
 Pulsar.registerFunction("buttonStyleName", buttonStyleName)
+
+function toLowerCase(str) {
+    return String(str).toLowerCase()
+}
+
+Pulsar.registerFunction("toLowerCase", toLowerCase)
