@@ -7,7 +7,7 @@ import SwiftUI
 {[ const tokens = ds.tokensByGroupId(group.id) /]}
 {[ let hasBorder = false /]}
 {[ for token in tokens ]}
-{[ if token.name.toLowercase() == "border" ]}
+{[ if toLowerCase(token.name) == "border" ]}
 {[ hasBorder = true /]}
 {[/]}
 {[/]}
