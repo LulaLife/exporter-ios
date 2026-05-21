@@ -28,3 +28,9 @@ function fontWeightName(subfamily) {
 }
 
 Pulsar.registerFunction("fontWeightName", fontWeightName)
+
+function buttonStyleName(groupName) {
+    return groupName.charAt(0).toUpperCase() + groupName.slice(1) + "ButtonStyle"
+}
+
+Pulsar.registerFunction("buttonStyleName", buttonStyleName)
