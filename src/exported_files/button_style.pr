@@ -6,11 +6,13 @@ import SwiftUI
 {[ if !(group.tokenIds.count() === 0 && group.subgroups.count() === 0) ]}
 {[ if group.name == "button" ]}
 {[ for subgroup in group.subgroups ]}
+{[ if subgroup.name == "button" ]}
 {[ const tokens = ds.tokensByGroupId(subgroup.id) /]}
 {[ let hasBorder = false /]}
 {[ for token in tokens ]}
 {[ if toLowerCase(token.name) == "border" ]}
 {[ hasBorder = true /]}
+{[/]}
 {[/]}
 {[/]}
 
