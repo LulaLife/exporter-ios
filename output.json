@@ -26,10 +26,6 @@
         {
             "invoke": "typography.pr",
             "write_to": "Styles/FontExtension.swift"
-        },
-        {
-            "invoke": "button_style.pr",
-            "write_to": "Styles/ButtonStyles.swift"
         }
     ]
 }
