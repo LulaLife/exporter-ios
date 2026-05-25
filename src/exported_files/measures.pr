@@ -29,7 +29,7 @@ public enum AppMeasures {
     {[/]}
     {[/]}
 
-    var rawValue: CGFloat {
+    var value: CGFloat {
         switch self {
     {[ for group in ds.tokenGroupsOfType("Measure", brand.id) ]}
     {[ const tokens = ds.tokensByGroupId(group.id) /]}
