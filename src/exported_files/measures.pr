@@ -6,27 +6,54 @@ public enum AppMeasures {
     {[ for group in ds.tokenGroupsOfType("Measure", brand.id) ]}
     {[ const tokens = ds.tokensByGroupId(group.id) /]}
     {[ if !(tokens.count() === 0 && group.subgroups.count() === 0) ]}
-    {[ if !group.isRoot ]}
-
-    // {{ group.name }}
-    {[/]}
-    {[ if (group.tokenIds.count() !== 0 && (tokens.first() && tokens.first().description === 0)) ]}
-
-    {[/]}
     {[ for token in tokens ]}
     {[ if (token.description && token.description.count() > 0) ]}
-
     {{ createDocumentationComment(token.description, "    ") }}
     {[/]}
     {[ let prefix = "" /]}
+    {[ let hasPrefix = false /]}
     {[ if group.path.count().equals(2) ]}
     {[ prefix = group.path[1].camelcased(false) /]}
+    {[ hasPrefix = true /]}
     {[/]}
     {[ if group.path.count().equals(3) ]}
     {[ prefix = group.path[1].camelcased(false) /]}
+    {[ hasPrefix = true /]}
     {[/]}
-    public static let {{ prefix }}{{ group.name.camelcased(false) }}{{ token.name.camelcased(true) }} = {{ token.value.measure }}
+    {[ if hasPrefix ]}
+    case {{ lowerFirst(prefix) }}{{ group.name.camelcased(false) }}{{ token.name.camelcased(true) }}
+    {[ else ]}
+    case {{ lowerFirst(group.name.camelcased(false)) }}{{ token.name.camelcased(true) }}
     {[/]}
     {[/]}
     {[/]}
+    {[/]}
+
+    var rawValue: CGFloat {
+        switch self {
+    {[ for group in ds.tokenGroupsOfType("Measure", brand.id) ]}
+    {[ const tokens = ds.tokensByGroupId(group.id) /]}
+    {[ if !(tokens.count() === 0 && group.subgroups.count() === 0) ]}
+    {[ for token in tokens ]}
+    {[ let prefix = "" /]}
+    {[ let hasPrefix = false /]}
+    {[ if group.path.count().equals(2) ]}
+    {[ prefix = group.path[1].camelcased(false) /]}
+    {[ hasPrefix = true /]}
+    {[/]}
+    {[ if group.path.count().equals(3) ]}
+    {[ prefix = group.path[1].camelcased(false) /]}
+    {[ hasPrefix = true /]}
+    {[/]}
+    {[ if hasPrefix ]}
+        case .{{ lowerFirst(prefix) }}{{ group.name.camelcased(false) }}{{ token.name.camelcased(true) }}:
+    {[ else ]}
+        case .{{ lowerFirst(group.name.camelcased(false)) }}{{ token.name.camelcased(true) }}:
+    {[/]}
+            return {{ token.value.measure }}
+    {[/]}
+    {[/]}
+    {[/]}
+        }
+    }
 }

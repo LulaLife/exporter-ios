@@ -40,3 +40,11 @@ function toLowerCase(str) {
 }
 
 Pulsar.registerFunction("toLowerCase", toLowerCase)
+
+function lowerFirst(str) {
+    const s = String(str)
+    if (!s) return s
+    return s.charAt(0).toLowerCase() + s.slice(1)
+}
+
+Pulsar.registerFunction("lowerFirst", lowerFirst)
