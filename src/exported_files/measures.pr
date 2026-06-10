@@ -12,6 +12,8 @@ public enum AppMeasures {
     {[/]}
     {[ let prefix = "" /]}
     {[ let hasPrefix = false /]}
+    {[ let lastPrefix = "" /]}
+    {[ let hasLastPrefix = false /]}
     {[ if group.path.count().equals(2) ]}
     {[ prefix = group.path[1].camelcased(false) /]}
     {[ hasPrefix = true /]}
@@ -20,8 +22,15 @@ public enum AppMeasures {
     {[ prefix = group.path[1].camelcased(false) /]}
     {[ hasPrefix = true /]}
     {[/]}
+    {[ if group.path.count().equals(4) ]}
+    {[ prefix = group.path[1].camelcased(false) /]}
+    {[ lastPrefix = group.path.last().camelcased(false) /]}
+    {[ hasLastPrefix = true /]}
+    {[/]}
     {[ if hasPrefix ]}
     case {{ lowerFirst(prefix) }}{{ group.name.camelcased(false) }}{{ token.name.camelcased(true) }}
+    {[ elseif hasLastPrefix ]}
+    case {{ lowerFirst(prefix) }}{{ lowerFirst(lastPrefix) }}{{ group.name.camelcased(false) }}{{ token.name.camelcased(true) }}
     {[ else ]}
     case {{ lowerFirst(group.name.camelcased(false)) }}{{ token.name.camelcased(true) }}
     {[/]}
@@ -37,16 +46,25 @@ public enum AppMeasures {
     {[ for token in tokens ]}
     {[ let prefix = "" /]}
     {[ let hasPrefix = false /]}
+    {[ let lastPrefix = "" /]}
+    {[ let hasLastPrefix = false /]}
     {[ if group.path.count().equals(2) ]}
-    {[ prefix = group.path[1].camelcased(false) /]}
+    {[ prefix = group.path[1].camelcased(true) /]}
     {[ hasPrefix = true /]}
     {[/]}
     {[ if group.path.count().equals(3) ]}
-    {[ prefix = group.path[1].camelcased(false) /]}
+    {[ prefix = group.path[1].camelcased(true) /]}
     {[ hasPrefix = true /]}
+    {[/]}
+    {[ if group.path.count().equals(4) ]}
+    {[ prefix = group.path[1].camelcased(true) /]}
+    {[ lastPrefix = group.path.last().camelcased(true) /]}
+    {[ hasLastPrefix = true /]}
     {[/]}
     {[ if hasPrefix ]}
         case .{{ lowerFirst(prefix) }}{{ group.name.camelcased(false) }}{{ token.name.camelcased(true) }}:
+    {[ elseif hasLastPrefix ]}
+        case .{{ lowerFirst(prefix) }}{{ lowerFirst(lastPrefix) }}{{ group.name.camelcased(false) }}{{ token.name.camelcased(true) }}:
     {[ else ]}
         case .{{ lowerFirst(group.name.camelcased(false)) }}{{ token.name.camelcased(true) }}:
     {[/]}
