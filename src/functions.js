@@ -48,3 +48,18 @@ function lowerFirst(str) {
 }
 
 Pulsar.registerFunction("lowerFirst", lowerFirst)
+
+// SwiftUI Font has built-in static properties with these names; using them in
+// an extension causes a redeclaration error, so we append "Text" to avoid it.
+const SWIFT_FONT_RESERVED = [
+    'body', 'callout', 'caption', 'caption2', 'footnote',
+    'headline', 'largeTitle', 'subheadline', 'title', 'title2', 'title3'
+]
+
+function safeFontName(prefix, suffix) {
+    const full = String(prefix) + String(suffix)
+    const name = SWIFT_FONT_RESERVED.includes(full) ? full + 'Text' : full
+    return name.charAt(0).toLowerCase() + name.slice(1)
+}
+
+Pulsar.registerFunction("safeFontName", safeFontName)

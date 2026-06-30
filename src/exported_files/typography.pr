@@ -15,8 +15,8 @@ public extension Font {
     {[ if (token.description && token.description.count() > 0) ]}
     {{ createDocumentationComment(token.description, "    ") }}
     {[/]}
-    static var {[ inject "token_func_name" context this /]}: Font {
-        return {[ inject "font" context token.value /]}
+    static var {[ inject "font_token_func_name" context this /]}: Font {
+        return {[ inject "font" context token.value /]} 
     }
     {[/]}
     {[/]}
