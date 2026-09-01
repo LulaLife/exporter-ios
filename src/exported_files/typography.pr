@@ -21,4 +21,20 @@ public extension Font {
     {[/]}
     {[/]}
     {[/]}
+
+    var lineSpacing: CGFloat {
+        switch self {
+    {[ for group in ds.tokenGroupsOfType("Typography", brand.id) ]}
+    {[ const tokens = ds.tokensByGroupId(group.id) /]}
+    {[ if !(tokens.count() === 0 && group.subgroups.count() === 0) ]}
+    {[ for token in tokens ]} 
+        case .{[ inject "font_token_func_name" context this /]}:
+            return {[ inject "line_spacing" context token.value /]}
+    {[/]}
+    {[/]}
+    {[/]} 
+        default:
+            return 0
+        }
+    }
 }
