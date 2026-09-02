@@ -1,1 +1,1 @@
-{{ context.lineHeight.measure - context.fontSize.measure }}
+{{ (context.lineHeight.measure - context.fontSize.measure) / 2 }}
